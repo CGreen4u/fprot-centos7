@@ -60,7 +60,7 @@ ADD http://www.eicar.org/download/eicar.com.txt /malware/EICAR
 
 # Update F-PROT Definitions
 RUN mkdir /opt/malice
-RUN mkdir -p /opt/f-prot/fpupdate
+#RUN mkdir -p /opt/f-prot/fpupdate
 
 WORKDIR /malware
 
