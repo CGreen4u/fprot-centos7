@@ -11,7 +11,7 @@ RUN go build -ldflags "-s -w -X main.Version=v$(cat VERSION) -X main.BuildTime=$
 ####################################################
 # PLUGIN BUILDER
 ####################################################
-FROM ubuntu:bionic
+FROM centos:7
 
 LABEL maintainer "https://github.com/blacktop"
 
@@ -29,8 +29,8 @@ RUN groupadd -r malice \
 
 RUN buildDeps='ca-certificates wget' \
   && set -x \
-  && apt-get update -qq \
-  && apt-get install -yq $buildDeps libc6-i386 --no-install-recommends \
+  && yum -y update -qq \
+  && yum -y install -yq $buildDeps libc6-i386 \
   && set -x \
   && echo "===> Install F-PROT..." \
   && wget https://github.com/maliceio/malice-av/raw/master/fprot/fp-Linux.x86.32-ws.tar.gz \
@@ -45,12 +45,13 @@ RUN buildDeps='ca-certificates wget' \
   && chmod u+x /opt/f-prot/fpupdate \
   && ln -fs /opt/f-prot/man_pages/scan-mail.pl.8 /usr/share/man/man8/ \
   && echo "===> Clean up unnecessary files..." \
-  && apt-get purge -y --auto-remove $buildDeps && apt-get clean \
+  #&& yum -y remove -y $buildDeps && yum -y clean \
+  #&& yum remove $buildDeps && yum clean \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives /tmp/* /var/tmp/*
 
 # Ensure ca-certificates is installed for elasticsearch to use https
-RUN apt-get update -qq && apt-get install -yq --no-install-recommends ca-certificates \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+#RUN yum -y update -qq && yum install -yq ca-certificates \
+#  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY --from=go_builder /bin/avscan /bin/avscan
 
@@ -58,7 +59,8 @@ COPY --from=go_builder /bin/avscan /bin/avscan
 ADD http://www.eicar.org/download/eicar.com.txt /malware/EICAR
 
 # Update F-PROT Definitions
-RUN mkdir -p /opt/malice && /opt/f-prot/fpupdate
+RUN mkdir /opt/malice
+RUN mkdir -p /opt/f-prot/fpupdate
 
 WORKDIR /malware
 
