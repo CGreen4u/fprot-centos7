@@ -1,4 +1,5 @@
-# malice-fprot
+# cgreen010-fprot
+based off malice-fprot
 
 [![Circle CI](https://circleci.com/gh/malice-plugins/fprot.png?style=shield)](https://circleci.com/gh/malice-plugins/fprot) [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org) [![Docker Stars](https://img.shields.io/docker/stars/malice/fprot.svg)](https://hub.docker.com/r/malice/fprot/) [![Docker Pulls](https://img.shields.io/docker/pulls/malice/fprot.svg)](https://hub.docker.com/r/malice/fprot/) [![Docker Image](https://img.shields.io/badge/docker%20image-267MB-blue.svg)](https://hub.docker.com/r/malice/fprot/)
 
@@ -8,7 +9,7 @@ Malice F-PROT AntiVirus Plugin
 
 ### Dependencies
 
-- [ubuntu:bionic (_84.1 MB_\)](https://hub.docker.com/_/ubuntu/)
+Centos7
 
 ## Installation
 
@@ -18,13 +19,13 @@ Malice F-PROT AntiVirus Plugin
 ## Usage
 
 ```
-docker run --rm malice/fprot EICAR
+docker run --rm cgreen010/fprot EICAR
 ```
 
 ### Or link your own malware folder:
 
 ```bash
-$ docker run --rm -v /path/to/malware:/malware:ro malice/fprot FILE
+$ docker run --rm -v /path/to/malware:/malware:ro cgreen010/fprot FILE
 
 Usage: fprot [OPTIONS] COMMAND [arg...]
 
