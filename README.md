@@ -11,18 +11,18 @@ Centos7
 ## Installation
 
 1. Install [Docker](https://www.docker.io/).
-2. Download [trusted build](https://hub.docker.com/r/malice/fprot/) from public [DockerHub](https://hub.docker.com): `docker pull cgreen010/fprot`
+2. Download [trusted build](https://hub.docker.com/r/malice/fprot/) from public [DockerHub](https://hub.docker.com): `docker pull cgreen010/fprot-centos7`
 
 ## Usage
 
 ```
-docker run --rm cgreen010/fprot EICAR
+docker run --rm cgreen010/fprot-centos7 EICAR
 ```
 
 ### Or link your own malware folder:
 
 ```bash
-$ docker run --rm -v /path/to/malware:/malware:ro cgreen010/fprot FILE
+$ docker run --rm -v /path/to/malware:/malware:ro cgreen010/fprot-centos7 FILE
 
 Usage: fprot [OPTIONS] COMMAND [arg...]
 
